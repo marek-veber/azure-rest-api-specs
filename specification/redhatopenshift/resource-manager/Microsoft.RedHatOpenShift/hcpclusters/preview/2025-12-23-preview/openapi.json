@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Red Hat OpenShift Hosted Control Planes Service",
-    "version": "2024-06-10-preview",
+    "version": "2025-12-23-preview",
     "description": "Microsoft.RedHatOpenShift Resource Provider management API.",
     "x-typespec-generated": [
       {
@@ -1517,22 +1517,19 @@
         "maxPodGracePeriodSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "maxPodGracePeriod is the maximum seconds to wait for graceful pod termination before scaling down a NodePool.\nThe default is 600 seconds.",
-          "default": 600,
+          "description": "maxPodGracePeriod is the maximum seconds to wait for graceful pod termination before scaling down a NodePool.\nThe default is 600 seconds.\n\nNote: The default value is not declared in the API specification because\nof a TypeSpec bug with updatable fields. The default value will be\ndeclared in a future API version once the TypeSpec bug is fixed.\nhttps://github.com/Azure/typespec-azure/issues/1586",
           "minimum": 0
         },
         "maxNodeProvisionTimeSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "maxNodeProvisionTimeSeconds is the maximum time to wait for node provisioning before considering the\nprovisioning to be unsuccessful. The default is 900 seconds, or 15 minutes.",
-          "default": 900,
+          "description": "maxNodeProvisionTimeSeconds is the maximum time to wait for node provisioning before considering the\nprovisioning to be unsuccessful. The default is 900 seconds, or 15 minutes.\n\nNote: The default value is not declared in the API specification because\nof a TypeSpec bug with updatable fields. The default value will be\ndeclared in a future API version once the TypeSpec bug is fixed.\nhttps://github.com/Azure/typespec-azure/issues/1586",
           "minimum": 0
         },
         "podPriorityThreshold": {
           "type": "integer",
           "format": "int32",
-          "description": "podPriorityThreshold enables users to schedule “best-effort” pods, which shouldn’t trigger autoscaler actions,\nbut only run when there are spare resources available. The default is -10.\nSee the following for more details:\nhttps://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption",
-          "default": -10
+          "description": "podPriorityThreshold enables users to schedule “best-effort” pods, which shouldn’t trigger autoscaler actions,\nbut only run when there are spare resources available. The default is -10.\nSee the following for more details:\nhttps://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption\n\nNote: The default value is not declared in the API specification because\nof a TypeSpec bug with updatable fields. The default value will be\ndeclared in a future API version once the TypeSpec bug is fixed.\nhttps://github.com/Azure/typespec-azure/issues/1586"
         }
       }
     },
@@ -2276,7 +2273,6 @@
           "type": "integer",
           "format": "int32",
           "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are in minutes and from 0 to 10080 minutes (1 week).\n0 means that the MachinePool can be drained without any time limitation.\n\nThis is the value is used a default for all NodePools. It can be overridden\nby specifying nodeDrainTimeoutMinutes for a given NodePool",
-          "default": 0,
           "minimum": 0,
           "maximum": 10080,
           "x-ms-mutability": [
@@ -2333,7 +2329,6 @@
           "type": "integer",
           "format": "int32",
           "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are in minutes and from 0 to 10080 minutes (1 week).\n0 means that the MachinePool can be drained without any time limitation.\n\nThis is the value is used a default for all NodePools. It can be overridden\nby specifying nodeDrainTimeoutMinutes for a given NodePool",
-          "default": 0,
           "minimum": 0,
           "maximum": 10080,
           "x-ms-mutability": [
@@ -2468,14 +2463,20 @@
           "description": "The role definitions required for the User-Assigned managed identities used\nby Control Plane operators on a cluster.",
           "items": {
             "$ref": "#/definitions/OperatorIdentityRoles"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         },
         "dataPlaneOperators": {
           "type": "array",
           "description": "The role definitions required for the User-Assigned managed identities used\nby Data Plane operators on a cluster.",
           "items": {
             "$ref": "#/definitions/OperatorIdentityRoles"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -2485,7 +2486,7 @@
     },
     "KmsEncryptionProfile": {
       "type": "object",
-      "description": "Configure etcd encryption Key Management Service (KMS) key.\nYour Microsoft Entra application used to create the cluster must be authorized to access this keyvault,\ne.g using the AzureCLI: `az keyvault set-policy -n $KEYVAULT_NAME --key-permissions decrypt encrypt --spn <YOUR APPLICATION CLIENT ID>`",
+      "description": "Configure etcd encryption Key Management Service (KMS) key.\nYour Microsoft Entra application used to create the cluster must be authorized to access this keyvault,\ne.g using the AzureCLI: `az keyvault set-policy -n $KEYVAULT_NAME --key-permissions decrypt encrypt --spn (YOUR APPLICATION CLIENT ID)`",
       "properties": {
         "activeKey": {
           "$ref": "#/definitions/KmsKey",
@@ -2659,13 +2660,13 @@
         "min": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum number of nodes in the node pool",
+          "description": "The minimum number of nodes in the node pool.\nValidation:\n- Minimum: 0\n- Maximum: 200 (only when availabilityZone is not specified)\n- No maximum when availabilityZone is specified",
           "minimum": 0
         },
         "max": {
           "type": "integer",
           "format": "int32",
-          "description": "The maximum number of nodes in the node pool",
+          "description": "The maximum number of nodes in the node pool.\nValidation:\n- Minimum: 0 (must be >= min)\n- Maximum: 200 (only when availabilityZone is not specified)\n- No maximum when availabilityZone is specified",
           "minimum": 0
         }
       }
@@ -2770,7 +2771,8 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of worker nodes, it cannot be used together with autoscaling",
+          "description": "The number of worker nodes, it cannot be used together with autoscaling.\nValidation:\n- Minimum: 0\n- Maximum: 200 (only when availabilityZone is not specified)\n- No maximum when availabilityZone is specified",
+          "minimum": 0,
           "x-ms-mutability": [
             "read",
             "update",
@@ -2859,7 +2861,8 @@
         "replicas": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of worker nodes, it cannot be used together with autoscaling",
+          "description": "The number of worker nodes, it cannot be used together with autoscaling.\nValidation:\n- Minimum: 0\n- Maximum: 200 (only when availabilityZone is not specified)\n- No maximum when availabilityZone is specified",
+          "minimum": 0,
           "x-ms-mutability": [
             "read",
             "update",
@@ -2954,8 +2957,7 @@
         },
         "channelGroup": {
           "type": "string",
-          "description": "ChannelGroup is the name of the set to which this version belongs. Each version belongs to only a single set.",
-          "default": "stable",
+          "description": "ChannelGroup is the name of the set to which this version belongs.\nEach version belongs to only a single set.\n\nIf not specified, the default value is 'stable'.\n\nNote: The default value is not declared in the API specification because\nof a TypeSpec bug with updatable fields. The default value will be\ndeclared in a future API version once the TypeSpec bug is fixed.\nhttps://github.com/Azure/typespec-azure/issues/1586",
           "x-ms-mutability": [
             "read",
             "update",
@@ -3005,7 +3007,10 @@
           "description": "The role definitions required to be assigned to the identity assumed by this operator",
           "items": {
             "$ref": "#/definitions/RoleDefinition"
-          }
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "required": [
@@ -3102,7 +3107,7 @@
       "properties": {
         "managedResourceGroup": {
           "type": "string",
-          "description": "Resource group to put cluster resources",
+          "description": "Resource group name to put cluster resources\n\nIf not specified then a unique name is generated from the\nfollowing pattern\n\n\"aro-hcp-\" + clusterName + \"-\" + UUID\n\nwhere clusterName means the hcpOpenShiftClusters resource name\n(up to 45 characters) followed by a 16-byte universally unique\nidentifier per RFC 4122.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -3615,7 +3620,7 @@
         },
         "prefixPolicy": {
           "$ref": "#/definitions/UsernameClaimPrefixPolicy",
-          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
+          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'. If not specified, the\ndefault policy is 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
         }
       },
       "required": [
@@ -3638,7 +3643,7 @@
         },
         "prefixPolicy": {
           "$ref": "#/definitions/UsernameClaimPrefixPolicy",
-          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
+          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'. If not specified, the\ndefault policy is 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
         }
       }
     },
@@ -3656,8 +3661,7 @@
         },
         "channelGroup": {
           "type": "string",
-          "description": "ChannelGroup is the name of the set to which this version belongs. Each version belongs to only a single set.",
-          "default": "stable",
+          "description": "ChannelGroup is the name of the set to which this version belongs.\nEach version belongs to only a single set.\n\nIf not specified, the default value is 'stable'.\n\nNote: The default value is not declared in the API specification because\nof a TypeSpec bug with updatable fields. The default value will be\ndeclared in a future API version once the TypeSpec bug is fixed.\nhttps://github.com/Azure/typespec-azure/issues/1586",
           "x-ms-mutability": [
             "read",
             "update",

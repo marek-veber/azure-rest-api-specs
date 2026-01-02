@@ -2,7 +2,7 @@
   "title": "HcpOpenShiftClusters_CreateOrUpdate",
   "operationId": "HcpOpenShiftClusters_CreateOrUpdate",
   "parameters": {
-    "api-version": "2024-06-10-preview",
+    "api-version": "2025-12-23-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
     "resourceGroupName": "rgopenapi",
     "hcpOpenShiftClusterName": "hcpCluster-name",
@@ -119,7 +119,6 @@
             },
             "issuerUrl": "https://oidc.contoso.com"
           },
-          "provisioningState": "Succeeded",
           "console": {
             "url": "https://console.test.shrd.usw3test.hcp.osadev.cloud"
           },
@@ -183,6 +182,7 @@
       },
       "body": {
         "properties": {
+          "provisioningState": "Succeeded",
           "version": {
             "channelGroup": "stable",
             "id": "4.12"
@@ -216,7 +216,6 @@
             },
             "issuerUrl": "https://oidc.contoso.com"
           },
-          "provisioningState": "Succeeded",
           "console": {
             "url": "https://console.test.shrd.usw3test.hcp.osadev.cloud"
           },
