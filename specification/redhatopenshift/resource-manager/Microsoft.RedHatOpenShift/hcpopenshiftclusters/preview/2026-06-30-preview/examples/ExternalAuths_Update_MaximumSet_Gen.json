@@ -2,7 +2,7 @@
   "title": "ExternalAuths_Update_MaximumSet",
   "operationId": "ExternalAuths_Update",
   "parameters": {
-    "api-version": "2025-12-23-preview",
+    "api-version": "2026-06-30-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
     "resourceGroupName": "rgopenapi",
     "hcpOpenShiftClusterName": "hcpCluster-name",
@@ -63,13 +63,6 @@
       "body": {
         "properties": {
           "provisioningState": "Succeeded",
-          "condition": {
-            "type": "Available",
-            "status": "True",
-            "lastTransitionTime": "2025-07-03T17:28:03.180Z",
-            "reason": "A good reason",
-            "message": "An even better message."
-          },
           "issuer": {
             "url": "https://microsoft.com/a",
             "audiences": [
@@ -132,7 +125,7 @@
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "Location": "https://contoso.com/operationstatus"
       }
     }
   }

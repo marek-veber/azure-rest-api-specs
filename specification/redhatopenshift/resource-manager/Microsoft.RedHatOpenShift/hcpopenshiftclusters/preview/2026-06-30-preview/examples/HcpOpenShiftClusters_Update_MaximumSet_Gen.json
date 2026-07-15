@@ -2,7 +2,7 @@
   "title": "HcpOpenShiftClusters_Update",
   "operationId": "HcpOpenShiftClusters_Update",
   "parameters": {
-    "api-version": "2025-12-23-preview",
+    "api-version": "2026-06-30-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
     "resourceGroupName": "rgopenapi",
     "hcpOpenShiftClusterName": "hcpCluster-name",
@@ -44,6 +44,9 @@
               "172.16.0.0/12",
               "203.0.113.0/24"
             ]
+          },
+          "ingress": {
+            "type": "Public"
           },
           "platform": {
             "managedResourceGroup": "nhyhywrxupo",
@@ -136,7 +139,7 @@
     },
     "202": {
       "headers": {
-        "location": "https://contoso.com/operationstatus"
+        "Location": "https://contoso.com/operationstatus"
       }
     }
   }
