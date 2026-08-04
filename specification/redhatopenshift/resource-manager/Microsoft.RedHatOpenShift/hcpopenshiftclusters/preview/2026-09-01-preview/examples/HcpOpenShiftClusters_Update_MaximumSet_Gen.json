@@ -2,7 +2,7 @@
   "title": "HcpOpenShiftClusters_Update",
   "operationId": "HcpOpenShiftClusters_Update",
   "parameters": {
-    "api-version": "2026-06-30-preview",
+    "api-version": "2026-09-01-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
     "resourceGroupName": "rgopenapi",
     "hcpOpenShiftClusterName": "hcpCluster-name",
@@ -107,8 +107,7 @@
           "nodeDrainTimeoutMinutes": 20,
           "clusterImageRegistry": {
             "state": "Enabled"
-          },
-          "cryptoRestrictions": "None"
+          }
         },
         "identity": {
           "principalId": "e5867472-f0ed-4fc1-80e1-59b4c0256adb",

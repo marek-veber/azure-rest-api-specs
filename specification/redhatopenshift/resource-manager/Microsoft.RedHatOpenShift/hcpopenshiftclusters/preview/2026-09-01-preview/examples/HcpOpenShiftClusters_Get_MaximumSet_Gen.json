@@ -1,22 +1,11 @@
 {
-  "title": "HcpOpenShiftClusters_Update",
-  "operationId": "HcpOpenShiftClusters_Update",
+  "title": "HcpOpenShiftClusters_Get",
+  "operationId": "HcpOpenShiftClusters_Get",
   "parameters": {
-    "api-version": "2026-06-30-preview",
+    "api-version": "2026-09-01-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
     "resourceGroupName": "rgopenapi",
-    "hcpOpenShiftClusterName": "hcpCluster-name",
-    "properties": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/serviceMI": {}
-        }
-      },
-      "tags": {
-        "key4965": "gadonynrfuc"
-      }
-    }
+    "hcpOpenShiftClusterName": "my-cool-cluster"
   },
   "responses": {
     "200": {
@@ -41,7 +30,7 @@
             "visibility": "Public",
             "url": "https://api.test.shrd.usw3test.hcp.osadev.cloud:443",
             "authorizedCidrs": [
-              "172.16.0.0/12",
+              "192.168.1.0/24",
               "203.0.113.0/24"
             ]
           },
@@ -136,11 +125,6 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2024-03-27T14:57:32.578Z"
         }
-      }
-    },
-    "202": {
-      "headers": {
-        "Location": "https://contoso.com/operationstatus"
       }
     }
   }

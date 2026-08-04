@@ -2,7 +2,7 @@
   "title": "HcpOpenShiftClusters_ListBySubscription",
   "operationId": "HcpOpenShiftClusters_ListBySubscription",
   "parameters": {
-    "api-version": "2026-06-30-preview",
+    "api-version": "2026-09-01-preview",
     "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D"
   },
   "responses": {
